@@ -16,8 +16,6 @@ df = web.DataReader(ticker, 'yahoo', start, end)
 
 print df.tail()
 
-
-
 plt.plot(df.index, df['Adj Close'])
 plt.title(ticker)
 plt.xlabel('Date')
