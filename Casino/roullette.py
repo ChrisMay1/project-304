@@ -3,7 +3,7 @@ import math
 import random as rand
 import matplotlib.pyplot as plt
 
-period = 100
+period = 1000
 times = 100
 initial = 100.0
 bank = initial
@@ -36,7 +36,7 @@ while j <= period:
 		if array[i] == 0 or array[i] == 37:
 			bank = bank - 2*bet
 			d = d + 1
-	results.append(bank)
+	results.append((bank/initial-1)*100)
 	bank = initial 
 	j = j + 1
 
@@ -44,7 +44,7 @@ positive = 0.0
 negative = 0.0
 
 for i in range(len(results)):
-	if results[i] > initial:
+	if results[i] > 0:
 		positive = positive + 1
 	else:
 		negative = negative + 1
@@ -57,6 +57,6 @@ t = np.arange(0,len(results),1)
 plt.bar(t, results)
 plt.title("Monte Carlo Roullette")
 plt.xlabel("Trial #")
-plt.ylabel("Value $")
+plt.ylabel("Return Percent %")
 plt.show()
 
