@@ -7,14 +7,14 @@ from matplotlib import style
 
 style.use('ggplot')
 
-start = dt.datetime(2018, 01, 01)
-end = dt.datetime(2019, 02, 27)
+start = dt.datetime(2018, 1, 1)
+end = dt.datetime(2019, 2, 27)
 
 ticker = 'INTC'
 
 df = web.DataReader(ticker, 'yahoo', start, end)
 
-print df.tail()
+print(df.tail())
 
 
 
