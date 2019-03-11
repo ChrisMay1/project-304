@@ -1,6 +1,8 @@
 import Tkinter as tk
 
-class Application(Tk.tk()):
+LARGE_FONT = ('Verdana', 12)
+
+class Application(tk.Tk):
 	
 	def __init__(self, *args, **kwargs):
 		
@@ -23,3 +25,19 @@ class Application(Tk.tk()):
 		
 		frame = self.frames[cont]
 		frame.tkraise()
+
+def buttonPress():
+	print "Button Pressed"
+
+class StartPage(tk.Frame):
+	
+	def __init__(self, parent, controller):
+		tk.Frame.__init__(self, parent)
+		label = tk.Label(self, text = "Start Page", font = LARGE_FONT)
+		label.pack(padx = 10, pady = 10)
+		
+		button1 = tk.Button(self, text = 'Visit page 1', command = buttonPress)
+		button1.pack()
+
+app = Application()
+app.mainloop()
