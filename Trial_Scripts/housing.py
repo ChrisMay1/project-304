@@ -1,20 +1,25 @@
 from __future__ import division
 import numpy as np
 import os
-import tarfile
-from six.moves import urllib
 
-download_root = "https://raw.githubusercontent.com/ageron/handson-ml/master/"
-HOUSING_path = os.path.join("datasets","housing")
-HOUSING_url = download_root + "datasets/housing/housing.tgz"
+fname = os.path.join('datasets','housing','housing.csv')
 
-def fetch_housing_data(housing_url = HOUSING_url, housing_path = HOUSING_path):
-	if not os.path.isdir(housing_path):
-		os.makedirs(housing_path)
-	tgz_path = os.path.join(housing_path, "housing.tgz")
-	urllib.request.urlretrieve(housing_url, tgz_path)
-	housing_tgz = tarfile.open(tgz_path)
-	housing_tgz.extractall(path = housing_path)
-	housing_tgz.clos(),
-fetch_housing_data()
+def split_train_test(data, test_ratio):
+	np.random.seed(42)
+	shuffled_indices = np.random.permutation(len(data))
+	test_set_size = int(len(data)*test_ratio)
+	test_indices = shuffled_indices[:test_set_size]
+	train_indices = shuffled_indices[test_set_size:]
+	return train_indices, test_indices
+
+try:
+	data = np.loadtxt(fname,delimiter = ',', dtype = 'str')
+	hdrs, index = {}, 0
+except IOerror:
+	traceback.format_exc()
+
+for hdr in data[0,:]:
+	hdrs.update({hdr:index})
+	index += 1
+train_set, test_set = split_train_test(data, 0.2)
 
