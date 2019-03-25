@@ -1,5 +1,5 @@
 0) git status
-1) Create file <filename>
+1) create file <filename>
 2) git add <filename>
 3) git commit -m "I'm going to add this file"
 4) git pull
