@@ -18,31 +18,31 @@ class DataSys:
 		API = 'yahoo'
 
 		print "Retriving", N, "stocks.."
-		stocks = []
+		available_data = []
 		available_symb = []
 		for i in range(N):
 			available_symb.append(symbols[i])
-			stocks.append(web.DataReader(symbols[i], API, start, end))
+			available_data.append(web.DataReader(symbols[i], API, start, end))
 		print "Stocks retrieved"
 		
 		self.symbols = available_symb
-		self.stocks = stocks
+		self.data = available_data
 	
 	def get_open(self, stock_id, time):
-		return self.stocks[stock_id]['Open'][time]
+		return self.data[stock_id]['Open'][time]
 		
 	def get_close(self, stock_id, time):
-		return self.stocks[stock_id]['Close'][time]
+		return self.data[stock_id]['Close'][time]
 		
 	def get_column(self, stock_id, key):
-		return self.stocks[stock_id][key]
+		return self.data[stock_id][key]
 	
 	def length(self):
-		return len(self.stocks[0])
+		return len(self.data[0])
 	
-	def get_symbols(self):
-		return self.symbols
+	def get_symbol(self, index):
+		return self.symbols[index]
 	
 	def get_keys(self):
-		return self.stocks[0].keys()
+		return self.data[0].keys()
 	

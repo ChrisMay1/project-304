@@ -8,10 +8,11 @@ np.random.seed()
 
 class agent:
 	
-	def __init__(self, StockData, money = 10000, shares = 0):
+	def __init__(self, StockData, money = 10000, shares = 0, name = None):
 		self.money = money
 		self.shares = shares
 		self.StockData = StockData
+		self.name = name
 
 	# buy a particular number of shares of stock at some time
 	def buy(self, n_shares, time):
@@ -58,7 +59,8 @@ ax = fig.add_subplot(121)
 
 x = np.arange(S.length())
 
-ax.plot(x, S.get_column(0, 'Open'), label = S.symbols[index])
+stock_index = 0
+ax.plot(x, S.get_column(stock_index, 'Open'), label = S.get_symbol(stock_index))
 ax.legend(loc = 'best')
 
 ax1 = fig.add_subplot(122)
