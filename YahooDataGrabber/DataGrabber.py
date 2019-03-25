@@ -33,6 +33,9 @@ class DataSys:
 		
 	def get_close(self, stock_id, time):
 		return self.stocks[stock_id]['Close'][time]
+		
+	def get_column(self, stock_id, key):
+		return self.stocks[stock_id][key]
 	
 	def length(self):
 		return len(self.stocks[0])

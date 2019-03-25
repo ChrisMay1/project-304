@@ -58,8 +58,7 @@ ax = fig.add_subplot(121)
 
 x = np.arange(S.length())
 
-index = 0
-ax.plot(x, S.stocks[index]['Open'], label = S.symbols[index])
+ax.plot(x, S.get_column(0, 'Open'), label = S.symbols[index])
 ax.legend(loc = 'best')
 
 ax1 = fig.add_subplot(122)
