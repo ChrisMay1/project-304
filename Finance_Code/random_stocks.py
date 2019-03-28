@@ -15,8 +15,8 @@ net_worth = 0.0
 account = "sold"
 style.use('ggplot')
 
-start = dt.datetime(2007,11,01)
-end = dt.datetime(2009,11,24)
+start = dt.datetime(2018,01,01)
+end = dt.datetime(2018,12,31)
 ticker = 'SPY'
 
 df = web.DataReader(ticker, 'yahoo', start, end)
@@ -54,9 +54,6 @@ def calculate_worth(count):
 	global net_worth
 	net_worth = bank_account + shares*float(df["Adj Close"][count])
 
-sampleSize = 10
-count = 1
-
 def agent():
 	i = 0
 	global profits
@@ -64,6 +61,8 @@ def agent():
 	global account
 	global bank_account
 	global net_worth
+	global return_
+	global count
 	wX = []
 	wY = []
 	while i < len(df):
@@ -79,15 +78,21 @@ def agent():
 		calculate_worth(i)
 		wX.append(df.index[i])
 		wY.append(net_worth)
-		plt.plot(wX, wY)
 		i +=1
-	
+	plt.plot(wX, wY)
+
 	if net_worth > initial:
 		profits += 1
+		return_.append((net_worth/initial - 1)*100)
 	else:
 		losses += 1
+		return_.append((net_worth/initial - 1)*100)
 	# ~ print "***************************Round: ", count, "Networth is: ", net_worth
     
+sampleSize = 1000
+count = 1
+return_ = []
+
 while count < sampleSize:
     shares = 0
     bank_account = initial
@@ -95,9 +100,13 @@ while count < sampleSize:
     account = 'sold'
     agent()
 
-    print "Profits are : ", profits
-    print "losses are : ", losses
     count += 1
+
+print "Profits are : ", profits
+print "losses are : ", losses
+
+average_return = np.mean(return_)
+print "Average rate of return for" , sampleSize, "agents was", average_return, "%"
 
 plt.axhline(10000, color = 'r')
 plt.ylabel("Account Value")
